@@ -1,32 +1,34 @@
 package com.iteesoft.ems.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "employees")
+@NoArgsConstructor
 public class Employee{
 	@Id
 	@GeneratedValue(strategy =  IDENTITY)
 	private long id;
 	private String firstName;
 	private String lastName;
-	private LocalDate dob;
 	private String email;
 	private String password;
 	private int salary;
-
-	@Transient
-	private Integer age;
-
+	private String role;
 
 	@OneToMany(mappedBy = "employee")
-	private List<Leave> leaves;
+	private List<Leave> leaveRequests;
+
+	@OneToMany(mappedBy = "employee")
+	private List<Attendance> attendanceList;
 
 }

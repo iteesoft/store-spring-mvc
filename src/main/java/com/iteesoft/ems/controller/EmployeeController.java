@@ -2,16 +2,13 @@ package com.iteesoft.ems.controller;
 
 import java.util.List;
 
+import com.iteesoft.ems.dto.Request;
 import com.iteesoft.ems.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.iteesoft.ems.service.EmployeeService;
 
@@ -21,19 +18,31 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@GetMapping("/")
+	@GetMapping("/employee")
 	public String login(Model model) {
-//		findPaginated(1, "firstName", "asc", model);
-		return "index";
+		findPaginated(1, "firstName", "asc", model);
+		model.addAttribute("login_user", model.getAttribute("login_user"));
+		//System.out.println(model.getAttribute("email"));
+		//System.out.println(model.getAttribute("login_user"));
+		return "employee_home";
 	}
 
 	// display list of employees
 	@GetMapping("/admin")
-	public String viewHomePage(Model model) {
+	public String viewAdminPage(Model model) {
 		findPaginated(1, "firstName", "asc", model);
-		return "employee_list";
+//		Employee loginUser = employeeService.getEmployeeByEmail(request.getEmail());
+		model.addAttribute("admin", "admin");
+		return "admin_home";
 	}
-	
+
+	@GetMapping("/loginEmployee")
+	public String loginEmployee(Model model) {
+		//Employee employee = employeeService.getEmployeeById(id);
+		//model.addAttribute("username", employee.getFirstName());
+		return "employee_home";
+	}
+
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
 		// create model attribute to bind form data
@@ -41,12 +50,22 @@ public class EmployeeController {
 		model.addAttribute("employee", employee);
 		return "new_employee";
 	}
-	
+
+	@PostMapping("/attendance")
+	public void markAttendance(Model model) {
+
+	}
+
+	@PostMapping("leaveRequest")
+	public void requestForLeave(Model model) {
+
+	}
+
 	@PostMapping("/saveEmployee")
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
 		// save employee to database
 		employeeService.saveEmployee(employee);
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 
 	@PostMapping("/register")
@@ -56,7 +75,7 @@ public class EmployeeController {
 
 		// set employee as a model attribute to pre-populate the form
 		model.addAttribute("employee", employee);
-		 return "redirect:/";
+		 return "redirect:/admin";
 
 	}
 	
@@ -76,7 +95,7 @@ public class EmployeeController {
 		
 		// call delete employee method 
 		this.employeeService.deleteEmployeeById(id);
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 	
 	
@@ -101,4 +120,6 @@ public class EmployeeController {
 		model.addAttribute("listEmployees", listEmployees);
 		return "index";
 	}
+
 }
+

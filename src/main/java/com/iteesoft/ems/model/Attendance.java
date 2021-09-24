@@ -1,9 +1,14 @@
 package com.iteesoft.ems.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Getter
@@ -12,17 +17,14 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @Table
 @Entity
-public class Leave {
+public class Attendance {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private long id;
-    private String leaveType;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private boolean approvalStatus = false;
+    private int id;
+    private LocalTime time;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
-
 }
