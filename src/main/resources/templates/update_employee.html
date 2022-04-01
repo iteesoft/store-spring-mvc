@@ -35,7 +35,7 @@
 		<hr>
 		<h3>Update Employee Details</h3>
 		<hr>
-		<form action="#" th:action="@{/saveEmployee}" th:object="${employee}"
+		<form action="#" th:action="@{/saveEmployee}" th:object="${user}"
 			method="POST">
 			
 			<!-- Add hidden form field to handle update -->
@@ -63,7 +63,7 @@
 			<div>
 				<label>Select Role:</label>
 				<select class="form-control mb-4 col-4" name="role" th:field="*{role}">
-					<option th:each="roleOpt : ${T(com.iteesoft.ems.enums.Role).values()}"
+					<option th:each="roleOpt : ${T(sta.enums.Role).values()}"
 							th:value="${roleOpt}"
 							th:text="${roleOpt.displayName}"></option>
 				</select>

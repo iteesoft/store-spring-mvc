@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.7.RELEASE</version>
+		<version>2.5.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.iteesoft.ems</groupId>
-	<artifactId>EmsWebApplication</artifactId>
+	<groupId>com.iteesoft.store</groupId>
+	<artifactId>StoreApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>EmsWebApplication</name>
-	<description>EMS project with Spring Boot and thymeleaf</description>
+	<name>Store-Web-App</name>
+	<description>Store Mgmnt System with Spring MVC and thymeleaf</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -38,14 +38,18 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.2.23</version>
-		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+<!--			<version>2.1.210</version>-->
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -59,7 +63,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-        <dependency>
+		<dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-tools</artifactId>
             <version>2.0</version>
@@ -70,6 +74,21 @@
 			<version>RELEASE</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -78,7 +97,26 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+						<nonFilteredFileExtension>swf</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
 		</plugins>
+<!--		<pluginRepositories>-->
+<!--			<pluginRepository>-->
+<!--				<id>spring-releases</id>-->
+<!--				<name>Spring Releases</name>-->
+<!--				<url>https://repo.spring.io/libs-release</url>-->
+<!--			</pluginRepository>-->
+<!--		</pluginRepositories>-->
+
 	</build>
 
 </project>
