@@ -9,5 +9,4 @@ Spring Boot CRUD Web application with Pagination and Sorting features
 - Spring Data JPA, 
 - Hibernate, 
 - H2 database
-- crud-pagination-sorting-
 
